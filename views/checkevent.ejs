@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event List</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header h1 {
+      font-size: 3em;
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      font-weight: 700;
+      text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+    }
+
+    .header p {
+      color: #a0a0a0;
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+
+    #forprod {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .prod {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      /* transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); */
+      cursor: pointer;
+      position: relative;
+      backdrop-filter: blur(10px);
+      animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    .prod:nth-child(1) { animation-delay: 0.1s; }
+    .prod:nth-child(2) { animation-delay: 0.2s; }
+    .prod:nth-child(3) { animation-delay: 0.5s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .prod:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+      border-color: rgba(255, 215, 0, 0.5);
+    }
+
+    .prod::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .prod:hover::before {
+      opacity: 1;
+    }
+
+    .prodimg {
+      height: 240px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prodimg::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(to top, rgba(26, 26, 46, 0.9), transparent);
+    }
+
+    .prod-content {
+      padding: 25px;
+    }
+
+    .prod h2 {
+      font-size: 1.5em;
+      margin-bottom: 12px;
+      color: #ffd700;
+      font-weight: 600;
+    }
+
+    .category {
+      display: inline-block;
+      background: rgba(255, 215, 0, 0.15);
+      color: #ffd700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .price {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #fff;
+      margin: 15px 0 20px 0;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    button {
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      color: #1a1a2e;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1em;
+      width: 100%;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
+      background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .event-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 215, 0, 0.9);
+      color: #1a1a2e;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.75em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 1;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2em;
+      }
+
+      #forprod {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .prod h2 {
+        font-size: 1.3em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.8em;
+      }
+
+      .prodimg {
+        height: 200px;
+      }
+
+      .prod-content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎯 Active Events</h1>
+    <p>Select an event to view participants</p>
+  </div>
+  
+  <div id="forprod"></div>
+
+  <script>
+    // === Sample Event Data ===
+    const events = [
+      { id: 1, name: "MuscleMax Pre-Workout", category: "Gym supplement", price: "₹3,500", image: "https://images.pexels.com/photos/4397840/pexels-photo-4397840.jpeg?auto=compress&cs=tinysrgb&w=800" },
+      { id: 2, name: "ProGain Whey Protein", category: "Protein", price: "₹4,000", image: "https://images.pexels.com/photos/6550835/pexels-photo-6550835.jpeg?auto=compress&cs=tinysrgb&w=800" },
+      { id: 3, name: "Hydro Bottle Set", category: "Other product", price: "₹1,200", image: "https://images.pexels.com/photos/1000084/pexels-photo-1000084.jpeg?auto=compress&cs=tinysrgb&w=800" }
+    ];
+
+    const container = document.getElementById("forprod");
+
+    // === Function to Render Events ===
+    function displayEvents() {
+      container.innerHTML = "";
+      events.forEach((event, index) => {
+        const div = document.createElement("div");
+        div.className = "prod";
+        div.innerHTML = `
+          <div class="prodimg" style="background-image:url('${event.image}');">
+            <div class="event-badge">Event #${event.id}</div>
+          </div>
+          <div class="prod-content">
+            <h2>${event.name}</h2>
+            <span class="category">${event.category}</span>
+            <div class="price">${event.price}</div>
+            <button onclick="viewParticipants(${event.id})">
+              View Participants →
+            </button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // === Open New Tab with Participants ===
+    function viewParticipants(eventId) {
+      window.open(`participants.html?id=${eventId}`, "_blank");
+    }
+
+    displayEvents();
+  </script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Filter</title>
+    <style>
+        section{
+            min-height: 100vh;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif;
+                        background-color:#171515;
+
+            color: yellow;
+            /* padding: 20px; */
+        }
+
+        #head{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom:2px solid yellow ;
+            width: 100%;
+            margin-bottom: 50px;
+            
+            /* margin-bottom: 20px; */
+        }
+
+        h1{
+            text-transform: uppercase;
+            /* text-align: center; */
+            font-size: 33px;
+            /* width: 100%; */
+            /* margin-bottom: 20px; */
+            /* border-bottom: 2px solid yellow; */
+        }
+
+        #controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* gap: 15px; */
+            /* background-color: #121111; */
+            /* background-color: green; */
+            /* padding: 10px 30px; */
+            /* width: 100%;
+            height: 13vh; */
+            /* margin-top: 50px; */
+             /* width: 100%; */
+
+        }
+
+
+
+        .fun{
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            /* background-color: aqua; */
+            width: 30%;
+            height: 100%;
+            padding: 50px;
+            background-color: #121111;
+            border: 2px solid rgb(40, 40, 36);
+
+        }
+
+        .fun label{
+            padding-bottom: 10px;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+        }
+
+         input, select {
+            background-color: #1f1e1e;
+            color: white;
+            border: 1px solid rgb(40, 40, 36);
+            padding: 6px;
+            outline: none;
+            font-size: 24px;
+             padding: 17px 10px;
+             border-radius: 10px;
+            width: 100%;
+        }
+
+         input:focus,select:focus{
+            border: 1px solid yellow;
+        }
+
+        #cont{
+            /* width: 100%; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0px 200px ;
+        }
+
+        #forprod{
+             display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            justify-content: center;
+            padding: 0px 40px;
+            margin: 0px auto;
+        }
+
+        .prod{
+            /* height: 30vh; */
+            /* border: 2px solid red; */
+            display: flex;
+            /* align-items: center; */
+            justify-content: center;
+            flex-direction: column;
+            background-color: #0a0a0a;
+            border-radius: 30px;
+            border: 1px solid rgb(44, 43, 43);
+        }
+
+        .prodimg{
+            background-image: url('https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&cs=tinysrgb&w=800');
+            height: 350px;
+            width: 400px;
+            /* background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%); */
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid #0a0a0a;
+        }
+
+        .prodimg p{
+            background-color: #0a0a0a;
+            width: 90px;
+            text-align: center;
+        }
+
+        .prodhead{
+            color: yellow;
+            font-size:25px ;
+            padding: 10px 20px;
+            text-transform: uppercase;
+        }
+
+        .prodpri{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            color: white;
+            font-weight: 600;
+        }
+
+         p {
+            margin: 5px 0;
+        }
+
+        .prodheadpri{
+            background-color: yellow;
+            color : black;
+            font-weight: 700;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .proddetails{
+            padding: 30px;
+        }
+
+
+        @media (max-width: 768px) {
+            .prod {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div id="head">
+          <h1>The Events lists of products</h1>
+
+        </div>
+
+      
+
+        <div id="cont">
+
+            <div id="controls">
+            <div id="srh" class="fun">   
+            <label>Search</label>    
+            <input type="search" placeholder="Search by name, price or quantity" id="searchInput">
+            </div> 
+
+             <div id="flt" class="fun">
+            <label>Filter</label>    
+            <select id="filterSelect">
+                <option value="all">All Categories</option>
+                <option value="gym supplement">Gym Supplement</option>
+                <option value="other product">Other Product</option>
+                <option value="protein">Protein</option>
+            </select>
+            </div>
+        </div>
+
+            <div id="forprod">
+         
+        </div>
+        </div>
+    </section>
+
+    <script>
+
+   const events = [
+    ["MuscleMax Pre-Workout", "Gym supplement", "No. of items : 3", "₹3,500"],
+    ["ProGain Whey Protein", "Protein", "No. of items : 2", "₹4,000"],
+    ["Hydro Bottle Set", "Other product", "No. of items : 6", "₹1,200"],
+    ["PowerFuel Creatine", "Gym supplement", "No. of items : 5", "₹4,800"],
+    ["NutriPro Isolate", "Protein", "No. of items : 4", "₹3,700"],
+    ["Fitness Gloves", "Other product", "No. of items : 8", "₹900"],
+    ["MegaPump BCAA", "Gym supplement", "No. of items : 3", "₹5,000"],
+    ["Gold Standard Protein", "Protein", "No. of items : 2", "₹2,500"],
+    ["BeastMode Mass Gainer", "Gym supplement", "No. of items : 7", "₹6,200"],
+    ["Shaker Bottle 600ml", "Other product", "No. of items : 5", "₹1,800"]
+];
+
+function display(eventsArray) {
+    const forprod = document.querySelector("#forprod");
+    forprod.innerHTML = '';
+
+    eventsArray.forEach((event, index) => {
+        const prod = document.createElement("div");
+        prod.classList.add('prod');
+
+        prod.innerHTML = `
+            <div class="prodimg">
+                <p>${event[1]}</p>
+            </div>
+            <div class="proddetails">
+                <h2 class="prodhead">${event[0]}</h2>
+                <div class="prodpri">
+                    <p>${event[2]}</p>
+                    <p class="prodhead">${event[3]}</p>
+                </div>    
+                <button class="deleteBtn">Delete</button>
+                <button class="editBtn">Edit</button>  
+            </div>
+        `;
+
+        // DELETE BUTTON FUNCTIONALITY
+        prod.querySelector(".deleteBtn").addEventListener("click", () => {
+            if (confirm(`Delete ${event[0]}?`)) {
+                events.splice(index, 1); // Remove from array
+                display(events); // Refresh the view
+            }
+        });
+
+        // EDIT BUTTON FUNCTIONALITY
+        prod.querySelector(".editBtn").addEventListener("click", () => {
+            const newName = prompt("Enter new product name:", event[0]);
+            const newCategory = prompt("Enter new category:", event[1]);
+            const newItems = prompt("Enter new number of items:", event[2]);
+            const newPrice = prompt("Enter new price:", event[3]);
+
+            // Update the event if user provided values
+            if (newName && newCategory && newItems && newPrice) {
+                events[index] = [newName, newCategory, newItems, newPrice];
+                alert("Product updated successfully!");
+                display(events);
+            }
+        });
+
+        forprod.appendChild(prod);
+    });
+}
+
+display(events);
+
+// --- Search & Filter ---
+const searchInput = document.getElementById("searchInput");
+const filterSelect = document.getElementById("filterSelect");
+
+function filterProducts() {
+    const searchValue = searchInput.value.toLowerCase();
+    const selectedCategory = filterSelect.value.toLowerCase();
+    const matcheddetails = [];
+
+    events.forEach(event => {
+        const name = event[0].toLowerCase();
+        const category = event[1].toLowerCase();
+        const items = event[2].toLowerCase();
+        const price = event[3].toLowerCase();
+
+        const matchesSearch =
+            name.includes(searchValue) ||
+            category.includes(searchValue) ||
+            items.includes(searchValue) ||
+            price.includes(searchValue);
+
+        const matchesCategory =
+            selectedCategory === "all" || category.includes(selectedCategory);
+
+        if (matchesSearch && matchesCategory) {
+            matcheddetails.push(event);
+        }
+    });
+
+    display(matcheddetails);
+}
+
+searchInput.addEventListener("keyup", filterProducts);
+filterSelect.addEventListener("change", filterProducts);
+
+    </script>
+</body>
+</html>

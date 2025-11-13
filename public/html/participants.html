@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Participants</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      animation: fadeIn 0.6s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 30px 20px;
+      background: rgba(255, 215, 0, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .event-name {
+      font-size: 1.8em;
+      color: #ffd700;
+      font-weight: 600;
+      margin-top: 10px;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+
+    .participant-count {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 20px;
+      background: rgba(255, 215, 0, 0.2);
+      border-radius: 20px;
+      font-size: 0.9em;
+      color: #ffd700;
+      border: 1px solid rgba(255, 215, 0, 0.4);
+    }
+
+    .table-wrapper {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse:collapse;
+    }
+
+    thead {
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    }
+
+    th {
+      padding: 20px;
+      text-align: left;
+      font-weight: 600;
+      color: #1a1a2e;
+      font-size: 1.1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 215, 0, 0.1);
+      transform: scale(1.01);
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    td {
+      padding: 18px 20px;
+      color: #e0e0e0;
+      font-size: 1em;
+    }
+
+    td:first-child {
+      color: #ffd700;
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+
+    .no-data {
+      padding: 60px 20px !important;
+      text-align: center;
+      color: #999;
+      font-style: italic;
+      font-size: 1.1em;
+    }
+
+    .email {
+      color: #a0a0a0;
+      font-size: 0.95em;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.8em;
+      }
+
+      .event-name {
+        font-size: 1.3em;
+      }
+
+      table {
+        font-size: 0.9em;
+      }
+
+      th, td {
+        padding: 12px 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      th:first-child, td:first-child {
+        display: none;
+      }
+      
+      .header h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🏆 Event Participants</h1>
+      <div class="event-name" id="eventName"></div>
+      <div class="participant-count" id="participantCount"></div>
+    </div>
+
+    <div class="table-wrapper">
+      <table id="participantTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // === Static Participant Data ===
+    const participants = {
+      1: [
+        { id: 101, name: "Tejas Deshmukh", email: "tejas@example.com" },
+        { id: 102, name: "Kiran Jojan", email: "kiran@example.com" }
+      ],
+      2: [
+        { id: 103, name: "Falguni Chambhare", email: "falguni@example.com" },
+        { id: 104, name: "Pranshu Pathak", email: "pranshu@example.com" }
+      ],
+      3: [
+        { id: 105, name: "Arjun Godara", email: "arjun@example.com" },
+        { id: 106, name: "Nidhi Sewagh", email: "nidhi@example.com" }
+      ]
+    };
+
+    const eventNames = {
+      1: "MuscleMax Pre-Workout",
+      2: "ProGain Whey Protein",
+      3: "Hydro Bottle Set"
+    };
+
+    // === Extract eventId from URL ===
+    const params = new URLSearchParams(window.location.search);
+    const eventId = params.get("id");
+
+    // === Display Event Name ===
+    document.getElementById("eventName").textContent = eventNames[eventId] || "Unknown Event";
+
+    // === Populate Table ===
+    const tbody = document.querySelector("#participantTable tbody");
+    const list = participants[eventId];
+
+    if (list && list.length > 0) {
+      document.getElementById("participantCount").textContent = `${list.length} Participant${list.length > 1 ? 's' : ''}`;
+      
+      list.forEach(p => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${p.id}</td>
+          <td>${p.name}</td>
+          <td class="email">${p.email}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    } else {
+      tbody.innerHTML = `<tr><td colspan="3" class="no-data">No participants found for this event</td></tr>`;
+      document.getElementById("participantCount").textContent = '0 Participants';
+    }
+  </script>
+</body>
+</html>

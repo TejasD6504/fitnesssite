@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offline Color Picker</title>
+<style>
+  body {
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 100px;
+  }
+  #colorBox {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin: 20px auto;
+  }
+  input[type="color"] {
+    width: 200px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <h1>🎨 Offline Color Picker</h1>
+  <div id="colorBox"></div>
+  <input type="color" id="picker">
+  <p id="code">HEX Code: #000000</p>
+
+  <script>
+    const picker = document.getElementById("picker");
+    const colorBox = document.getElementById("colorBox");
+    const code = document.getElementById("code");
+
+    picker.addEventListener("input", () => {
+      const color = picker.value;
+      colorBox.style.backgroundColor = color;
+      code.textContent = "HEX Code: " + color;
+    });
+  </script>
+</body>
+</html>
