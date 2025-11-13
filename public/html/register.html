@@ -1,175 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Registration Form</title>
-    <style>
-        body {
-            background-color: rgb(28, 27, 27);
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            width: 100%;
-            text-align: center;
-        }
-
-        #cont {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            margin-top: 30px;
-        }
-
-        #cont input {
-            height: 25px;
-            width: 40%;
-            margin-bottom: 10px;
-            padding: 5px;
-            border-radius: 5px;
-            border: none;
-        }
-
-        #cont button {
-            height: 35px;
-            width: 100px;
-            border: none;
-            background-color: #1f76f0;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #cont button:hover {
-            background-color: #0f5ad3;
-        }
-
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Event Registration Form</h1>
-
-    <div id="cont">
-        <label>Username</label>
-        <input type="text" id="username" placeholder="Enter username">
-        <span id="nameError" class="error"></span>
-
-        <label>Email</label>
-        <input type="text" id="email" placeholder="Enter Email">
-        <span id="emailError" class="error"></span>
-
-        <label>Mobile</label>
-        <input type="text" id="mobile" placeholder="Enter Phone no.">
-        <span id="mobileError" class="error"></span>
-
-        <button onclick="validateForm()">Submit</button>
-    </div>
-
-    <script>
-        function validateForm() {
-            // Get values
-            let name = document.getElementById("username").value.trim();
-            let email = document.getElementById("email").value.trim();
-            let mobile = document.getElementById("mobile").value.trim();
-
-            // Error message elements
-            let nameError = document.getElementById("nameError");
-            let emailError = document.getElementById("emailError");
-            let mobileError = document.getElementById("mobileError");
-
-            // Clear previous errors
-            nameError.textContent = "";
-            emailError.textContent = "";
-            mobileError.textContent = "";
-
-            // Validation flags
-            let valid = true;
-
-            // ===== Name Validation =====
-            // Must be at least 3 characters and only alphabets
-            if (name === "") {
-                nameError.textContent = "Username is required.";
-                valid = false;
-            } else if (!/^[A-Za-z ]+$/.test(name)) {
-                nameError.textContent = "Name should contain only letters.";
-                valid = false;
-            } else if (name.length < 3) {
-                nameError.textContent = "Name must be at least 3 characters.";
-                valid = false;
-            }
-
-            // ===== Email Validation =====
-            // Must match standard email pattern
-            let emailPattern = /^[a-zA-Z0-9._%+-]+@gmail.com$/;
-            if (email === "") {
-                emailError.textContent = "Email is required.";
-                valid = false;
-            } else if (!emailPattern.test(email)) {
-                emailError.textContent = "Invalid email format.";
-                valid = false;
-            }
-
-            // ===== Mobile Validation =====
-            // Must be 10 digits only
-            let mobilePattern = /^[7-9]{1}[0-9]{9}$/;
-            if (mobile === "") {
-                mobileError.textContent = "Mobile number is required.";
-                valid = false;
-            } else if (!mobilePattern.test(mobile)) {
-                mobileError.textContent = "Mobile number must be 10 digits.";
-                valid = false;
-            }
-
-            // ===== Final Result =====
-            if (valid) {
-                alert("✅ Registration Successful!");
-            }
-        }
-
-    // let mails = ["@gmail.com", "@yahoo.com", "@outlook.com"];
-
-    // function emailcheck() {
-    //     const emailPattern = /^[a-zA-Z0-9._%+/-]$/;
-
-    //     const value = email.value.trim().toLowerCase();
-
-    //     if (value === "") {
-    //         emailError.textContent = "";
-    //         return;
-    //     }
-
-    //     // Check if email includes any allowed domain
-    //     let hasDomain = mails.some(domain => value.includes(domain));
-
-    //     if (hasDomain) {
-    //         if (emailPattern.test(value)) {
-    //             emailError.textContent = "✅ Correct email";
-    //             emailError.style.color = "lightgreen";
-    //         } else {
-    //             emailError.textContent = "❌ Invalid email format";
-    //             emailError.style.color = "red";
-    //         }
-    //     } else {
-    //         emailError.textContent = "⚠️ Please use Gmail, Yahoo, or Outlook email";
-    //         emailError.style.color = "orange";
-    //     }
-    // }
-
-
-    //     email.addEventListner("keyup",emailcheck());
-    </script>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,138 +5,342 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Registration Form</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: rgb(28, 27, 27);
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            width: 100%;
-            text-align: center;
-        }
-
-        #cont {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffd700;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            margin-top: 30px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        #cont input {
-            height: 25px;
-            width: 40%;
+        body::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation: pulse 4s ease-in-out infinite 2s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 30px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                        0 0 100px rgba(255, 215, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.2em;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            animation: slideIn 0.6s ease-out backwards;
+        }
+
+        .form-group:nth-child(2) { animation-delay: 0.1s; }
+        .form-group:nth-child(3) { animation-delay: 0.2s; }
+        .form-group:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        label {
+            display: block;
             margin-bottom: 10px;
-            padding: 5px;
-            border-radius: 5px;
-            border: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        #cont button {
-            height: 35px;
-            width: 100px;
-            border: none;
-            background-color: #1f76f0;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
+        input {
+            width: 100%;
+            height: 50px;
+            padding: 0 20px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            outline: none;
         }
 
-        #cont button:hover {
-            background-color: #0f5ad3;
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        input:focus {
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
         }
 
         .error {
-            color: red;
-            font-size: 14px;
-            margin-bottom: 10px;
+            display: block;
+            margin-top: 8px;
+            font-size: 0.85em;
+            min-height: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .error:not(:empty) {
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        button {
+            width: 100%;
+            height: 55px;
+            border: none;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #0a0a0a;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .success {
+            color: #4ade80 !important;
+        }
+
+        .error-text {
+            color: #ff4444 !important;
+        }
+
+        .icon {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            input {
+                height: 45px;
+            }
+
+            button {
+                height: 50px;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Event Registration Form</h1>
+    <div class="form-container">
+        <h1>🎯 Event Registration</h1>
 
-    <div id="cont">
-        <label>Username</label>
-        <input type="text" id="username" placeholder="Enter username">
-        <span id="nameError" class="error"></span>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username">
+            <span id="nameError" class="error"></span>
+        </div>
 
-        <label>Email</label>
-        <input type="text" id="email" placeholder="Enter Email">
-        <span id="emailError" class="error"></span>
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="text" id="email" placeholder="your.email@gmail.com">
+            <span id="emailError" class="error"></span>
+        </div>
 
-        <label>Mobile</label>
-        <input type="text" id="mobile" placeholder="Enter Phone no.">
-        <span id="mobileError" class="error"></span>
+        <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="text" id="mobile" placeholder="10-digit mobile number">
+            <span id="mobileError" class="error"></span>
+        </div>
 
-        <button onclick="validateForm()">Submit</button>
+        <button onclick="validateForm()">Submit Registration</button>
     </div>
 
     <script>
-     
+        function validateForm() {
+            const username = document.querySelector("#username").value.trim();
+            const email = document.querySelector("#email").value.trim();
+            const phone = document.querySelector("#mobile").value.trim();
 
-        function validateForm()
-        {
-        const username = document.querySelector("#username").value.trim();
-        const email = document.querySelector("#email").value;
-        const phone = document.querySelector("#mobile").value;
+            const usernamePattern = /^[a-zA-Z0-9]{3,20}$/;
+            const emailPattern = /^[a-zA-Z0-9.%+]+@gmail\.com$/;
+            const mobilePattern = /^[7-9]{1}[0-9]{9}$/;
 
-            console.log(username.length);
-            console.log(email);
-            console.log(phone);
+            const usererr = document.querySelector("#nameError");
+            const emailerr = document.querySelector("#emailError");
+            const phoneerr = document.querySelector("#mobileError");
 
-        usernamepattern = /^[a-zA-Z0-9]{1,20}$/;
-        emailpattern = /^[a-zA-Z0-9.%+]+@gmail.com$/;
-        mobpattern = /^[7-9]{1}[0-9]{9}$/;
+            let isValid = true;
 
-        const usererr = document.querySelector("#nameError");
-        const emailerr = document.querySelector("#emailError");
-        const phoneerr = document.querySelector("#mobileError");
+            // Username Validation
+            if (username.length === 0) {
+                usererr.textContent = "❌ Username is required";
+                usererr.className = "error error-text";
+                isValid = false;
+            } else if (!usernamePattern.test(username)) {
+                usererr.textContent = "❌ Username must be 3-20 alphanumeric characters";
+                usererr.className = "error error-text";
+                isValid = false;
+            } else {
+                usererr.textContent = "✅ Valid username";
+                usererr.className = "error success";
+            }
 
-        if(username.length === 0){
-            usererr.textContent = "Username has give";
-        }else if(!usernamepattern.test(username))
-        {
-            usererr.textContent = "Invalid format";
-        }else{
-            usererr.textContent = "Correct username";
-            usererr.style.color = "green";
+            // Email Validation
+            if (email.length === 0) {
+                emailerr.textContent = "❌ Email is required";
+                emailerr.className = "error error-text";
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                emailerr.textContent = "❌ Please enter a valid Gmail address";
+                emailerr.className = "error error-text";
+                isValid = false;
+            } else {
+                emailerr.textContent = "✅ Valid email";
+                emailerr.className = "error success";
+            }
+
+            // Phone Validation
+            if (phone.length === 0) {
+                phoneerr.textContent = "❌ Mobile number is required";
+                phoneerr.className = "error error-text";
+                isValid = false;
+            } else if (!mobilePattern.test(phone)) {
+                phoneerr.textContent = "❌ Enter a valid 10-digit mobile number";
+                phoneerr.className = "error error-text";
+                isValid = false;
+            } else {
+                phoneerr.textContent = "✅ Valid mobile number";
+                phoneerr.className = "error success";
+            }
+
+            // Success Message
+            if (isValid) {
+                setTimeout(() => {
+                    alert("🎉 Registration Successful!\n\nWelcome to the event, " + username + "!");
+                    // Clear form
+                    document.querySelector("#username").value = "";
+                    document.querySelector("#email").value = "";
+                    document.querySelector("#mobile").value = "";
+                    usererr.textContent = "";
+                    emailerr.textContent = "";
+                    phoneerr.textContent = "";
+                }, 300);
+            }
         }
 
-           if(email.length === 0){
-            emailerr.textContent = "Email has to been given";
-        }else if(!emailpattern.test(email) )
-        {
-            emailerr.textContent = "Invalid format";
-        }else{
-            emailerr.textContent = "Correct Email";
-            emailerr.style.color = "green";
-        }
-
-           if(phone.length === 0){
-            phoneerr.textContent = "Phone no. has to been given";
-        }else if(!mobpattern.test(phone) )
-        {
-            phoneerr.textContent = "Invalid format";
-        }else{
-            phoneerr.textContent = "Correct Phone no.";
-            phoneerr.style.color = "green";
-        }
-
-    //          if (username.length === 0) {
-    //     usererr.textContent = "Username is required";
-    //     usererr.style.color = "red";
-    //   } else if (!usernamepattern.test(username)) {
-    //     usererr.textContent = "Invalid username format";
-    //     usererr.style.color = "red";
-    //   } else {
-    //     usererr.textContent = "Valid username";
-    //     usererr.style.color = "lightgreen";
-    //   }
-        }
+        // Add Enter key support
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    validateForm();
+                }
+            });
+        });
     </script>
 </body>
 </html>
-
-
