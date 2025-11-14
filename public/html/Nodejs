@@ -1,0 +1,74 @@
+Here’s a simple, step-by-step guide to set up Node.js on your PC (Windows):
+
+✅ How to Install Node.js on Windows PC
+Step 1: Download Node.js
+
+Go to the official Node.js website:
+👉 https://nodejs.org
+
+You will see two versions:
+
+LTS (Recommended) → Stable version
+
+Current → Latest features
+
+Click LTS Download (Windows Installer .msi).
+
+✅ Step 2: Install Node.js
+
+After download, open the .msi file.
+
+Click Next.
+
+Accept the License Agreement → Next.
+
+Choose the installation location (default is fine) → Next.
+
+Keep all components selected → Next.
+
+Click Install.
+
+After installation, click Finish.
+
+✅ Step 3: Verify Installation
+
+Open Command Prompt or PowerShell and type:
+
+✔ Check Node version
+node -v
+
+✔ Check npm version
+npm -v
+
+
+If both show version numbers, Node.js is successfully installed!
+
+✅ Step 4: Create Your First Node.js File
+
+Create a folder → example: node-demo
+
+Inside it, create a file: app.js
+
+Add this code:
+
+console.log("Hello Node.js!");
+
+
+Open command prompt inside the folder and run:
+
+node app.js
+
+
+You should see:
+
+Hello Node.js!
+
+🎉 You have successfully set up Node.js!
+
+If you want, I can also show:
+✔ How to install VS Code
+✔ How to create a Node project (npm init)
+✔ How to install Express.js
+✔ How to make your first API in Node.js
+
+Just tell me!
